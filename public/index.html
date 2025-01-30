@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Perfil Pichanguero</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-500 text-white py-4 shadow-md">
+        <h1 class="text-center text-3xl font-bold">¡Bienvenido a Perfil Pichanguero!</h1>
+    </header>
+
+    <main class="container mx-auto p-4">
+        <section class="text-center my-8">
+            <h2 class="text-2xl font-semibold mb-4">Ingresa para ver tus mejores jugadas</h2>
+            <div class="space-y-4">
+                <!-- Botón de Registro -->
+                <button id="register-btn" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 flex items-center justify-center mx-auto w-1/2">
+                    <span class="material-icons mr-2">person_add</span>
+                    Registro
+                </button>
+
+                <!-- Botón de Inicio de Sesión -->
+                <button id="login-btn" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 flex items-center justify-center mx-auto w-1/2">
+                    <span class="material-icons mr-2">login</span>
+                    Iniciar Sesión
+                </button>
+
+                    <!-- Contenedor para los formularios dinámicos -->
+                <div id="content" class="mt-8">
+                    <!-- Aquí se cargarán dinámicamente los formularios de registro e inicio de sesión -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <p class="text-center text-sm">© 2025 Análisis Pichanguero. Todos los derechos reservados.</p>
+    </footer>
+
+    <script type="module" src="../src/main.js"></script>
+</body>
+</html>
