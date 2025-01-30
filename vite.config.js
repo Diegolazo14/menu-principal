@@ -8,7 +8,8 @@ export default defineConfig({
     emptyOutDir: true, // Limpia la carpeta "dist" antes de cada build
     rollupOptions: {
       input: {
-        match: path.resolve(__dirname, "public/index.html"),
+        main: path.resolve(__dirname, "index.html"),
+        profile: path.resolve(__dirname, "profile.html"),
       }
     }
   },

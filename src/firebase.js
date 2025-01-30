@@ -1,5 +1,6 @@
 //firebase.js
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 // Configuración del proyecto Firebase
 const firebaseConfig = {
@@ -13,4 +14,6 @@ const firebaseConfig = {
 
 // Inicializa Firebase
 const app = initializeApp(firebaseConfig);
-export default app;
+const auth = getAuth(app);
+
+export { app, auth };

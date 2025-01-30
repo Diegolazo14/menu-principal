@@ -1,7 +1,10 @@
-import app from "./firebase.js";
+import { app, auth } from "./firebase.js";
 console.log("Firebase inicializado correctamente:", app);
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM completamente cargado y listo.");
 
 // Mostrar formulario de registro
 document.getElementById("register-btn").addEventListener("click", () => {
@@ -56,4 +59,5 @@ document.getElementById("login-btn").addEventListener("click", () => {
             alert(`Error al iniciar sesión: ${error.message}`);
         }
     });
+});
 });
