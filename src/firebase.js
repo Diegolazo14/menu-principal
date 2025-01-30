@@ -1,19 +1,16 @@
 //firebase.js
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 
 // Configuración del proyecto Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyC1iOjvZxwW6nlOqzFdLEtFgZbuu8XYJbI",
-  authDomain: "futbol7-af5c8.firebaseapp.com",
-  projectId: "futbol7-af5c8",
-  storageBucket: "futbol7-af5c8.firebasestorage.app",
-  messagingSenderId: "981838542086",
-  appId: "1:981838542086:web:ae6b9a66dcb192b918da87",
+  apiKey: "AIzaSyBAd61cqVK0wMS7-3d-Gab38NvuWm9x4bc",
+  authDomain: "menu-principal-ae804.firebaseapp.com",
+  projectId: "menu-principal-ae804",
+  storageBucket: "menu-principal-ae804.firebasestorage.app",
+  messagingSenderId: "324343508342",
+  appId: "1:324343508342:web:04d19f920c5682daf31e57",
 };
 
 // Inicializa Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-export { auth };
+export default app;

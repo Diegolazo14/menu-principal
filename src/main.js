@@ -1,4 +1,6 @@
-import { auth } from "./firebase";
+import app from "./firebase.js";
+console.log("Firebase inicializado correctamente:", app);
+
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 // Mostrar formulario de registro
@@ -54,9 +56,4 @@ document.getElementById("login-btn").addEventListener("click", () => {
             alert(`Error al iniciar sesión: ${error.message}`);
         }
     });
-});
-
-// Redirigir al análisis de partidos
-document.getElementById("register-match-btn").addEventListener("click", () => {
-    window.location.href = "/match.html";
 });

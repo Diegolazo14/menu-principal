@@ -8,11 +8,11 @@ export default defineConfig({
     emptyOutDir: true, // Limpia la carpeta "dist" antes de cada build
     rollupOptions: {
       input: {
-        match: path.resolve(__dirname, "public/match.html"),
+        match: path.resolve(__dirname, "public/index.html"),
       }
     }
   },
   server: {
-    port: 5173 // Puerto para desarrollo local
+    port: 5174 // Puerto para desarrollo local
   }
 });
