@@ -23,9 +23,6 @@
     "firebase": "^11.2.0",
     "json2csv": "^6.0.0-alpha.2",
     "path": "^0.12.7",
-     "vite": "^4.5.0"
-  },
-  "devDependencies": {
-   
+    "vite": "^4.5.9"
   }
 }
