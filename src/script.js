@@ -1,44 +1,84 @@
-import { auth, db } from "./firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { auth, db } from "./firebase.js";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
-// Esperar a que el DOM cargue
-document.addEventListener("DOMContentLoaded", async () => {
-    const matchesList = document.getElementById("matches-list");
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        console.log("Usuario autenticado:", user.email);
+        console.log("Buscando datos en Firestore para:", user.email);
 
-    // Verificar si el usuario está autenticado
+        try {
+            const usersRef = collection(db, "Users");
+            const q = query(usersRef, where("email", "==", user.email));
+            console.log("Consulta preparada, ejecutando...");
+            const querySnapshot = await getDocs(q);
+            console.log("resultado de la consulta:", querySnapshot.empty ?"Sin resultados" : querySnapshot.size + " documentos encontrados");
+
+            if (!querySnapshot.empty) {
+                querySnapshot.forEach((doc) => {
+                    console.log("Datos del usuario encontrados:", doc.data());
+
+                    const userData = doc.data();
+                    if (userData.matches && userData.matches.length > 0) {
+                        const matchesContainer = document.getElementById("matches-container");
+                        console.log("Partidos encontrados:", userData.matches);
+                        userData.matches.forEach(match => {
+                            console.log("Procesando partido:", match); // Depuración Extra
+                            const matchElement = document.createElement("p");
+                            matchElement.innerHTML = `Partido: ${match.matchId} - <a href="${match.videoUrl}" target="_blank">Ver video</a>`;
+                            matchesContainer.appendChild(matchElement);
+                        });
+                    } else {
+                        console.warn("El usuario no tiene partidos registrados.");
+                    }
+                });
+            } else {
+                console.error("No se encontró ningún usuario con ese email.");
+                document.getElementById("matches-container").innerText = "No se encontraron partidos asociados a este usuario.";
+            }
+        } catch (error) {
+            console.error("Error al obtener datos del usuario:", error);
+        }
+    } else {
+        console.log("No hay usuario autenticado.");
+        window.location.href = "index.html"; // Redirigir al login si no hay usuario autenticado
+    }
+});
+
+// Función para cargar los datos del usuario autenticado
+async function loadUserProfile() {
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             console.log("Usuario autenticado:", user.email);
+            const userData = await getUserDataByEmail(user.email);
 
-            // Obtener referencia al documento del usuario en Firestore
-            const userRef = doc(db, "Users", user.uid);
-            const userSnap = await getDoc(userRef);
-
-            if (userSnap.exists()) {
-                const userData = userSnap.data();
-                const matches = userData.matches || [];
-
-                // Limpiar el contenido
-                matchesList.innerHTML = "";
-
-                if (matches.length > 0) {
-                    matches.forEach((match) => {
-                        const matchElement = document.createElement("div");
-                        matchElement.innerHTML = `
-                            <p><strong>Partido:</strong> ${match.matchId}</p>
-                            <p><a href="${match.videoUrl}" target="_blank">Ver Resumen</a></p>
-                            <hr>
-                        `;
-                        matchesList.appendChild(matchElement);
+            if (userData) {
+                document.getElementById("user-name").textContent = userData.name || "Usuario desconocido";
+                
+                // Mostrar videos de los partidos
+                const videosContainer = document.getElementById("videos-container");
+                videosContainer.innerHTML = ""; // Limpiar contenido anterior
+                
+                if (userData.matches && userData.matches.length > 0) {
+                    userData.matches.forEach((videoUrl) => {
+                        const videoElement = document.createElement("iframe");
+                        videoElement.src = videoUrl;
+                        videoElement.width = "560";
+                        videoElement.height = "315";
+                        videoElement.frameBorder = "0";
+                        videoElement.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                        videosContainer.appendChild(videoElement);
                     });
                 } else {
-                    matchesList.innerHTML = "<p>No has participado en ningún partido aún.</p>";
+                    videosContainer.innerHTML = "<p>No hay videos disponibles.</p>";
                 }
             } else {
-                matchesList.innerHTML = "<p>Error al obtener datos del usuario.</p>";
+                console.error("Error al obtener datos del usuario.");
             }
         } else {
-            matchesList.innerHTML = "<p>No estás autenticado. Por favor, inicia sesión.</p>";
+            console.error("No hay usuario autenticado.");
         }
     });
-});
+}
+
+// Llamar la función cuando cargue la página
+window.onload = loadUserProfile;
