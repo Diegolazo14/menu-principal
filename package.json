@@ -9,7 +9,7 @@
   },
   "scripts": {
   "preinstall": "npm install -g vite", 
-  "build": "npx vite build && copy server.js dist/server.js",
+  "build": "npx vite build && copy server.js dist\\server.js",
   "start": "node dist/server.js"
 }
 ,
