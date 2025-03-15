@@ -1,4 +1,4 @@
-import{a as i,c as l,b as s,s as a}from"./firebase-6e02d4b2.js";console.log("Firebase inicializado correctamente:",i);document.addEventListener("DOMContentLoaded",()=>{console.log("DOM completamente cargado y listo."),document.getElementById("register-btn").addEventListener("click",()=>{const r=document.getElementById("content");r.innerHTML=`
+import{a as i,c as l,b as s,s as a}from"./firebase-D74WKzzr.js";console.log("Firebase inicializado correctamente:",i);document.addEventListener("DOMContentLoaded",()=>{console.log("DOM completamente cargado y listo."),document.getElementById("register-btn").addEventListener("click",()=>{const r=document.getElementById("content");r.innerHTML=`
         <h2 class="text-xl font-semibold mb-4">Registro</h2>
         <form id="register-form" class="space-y-4">
             <input type="email" id="register-email" placeholder="Correo electrónico" class="w-full px-4 py-2 border rounded-lg" required>

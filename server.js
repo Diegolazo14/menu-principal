@@ -11,11 +11,11 @@ const publicPath = __dirname;
 app.use(express.static(publicPath));
 
 // Servir archivos JS desde "dist/assets"
-app.use("/assets", express.static(path.join(publicPath, "dist/assets")));
+app.use("/assets", express.static(path.join(publicPath, "assets")));
 
 // Redirige todas las rutas a "index.html"
 app.get("*", (req, res) => {
-  res.sendFile(path.join(publicPath, "dist/index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 // Iniciar el servidor

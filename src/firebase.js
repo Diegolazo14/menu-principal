@@ -1,7 +1,7 @@
 //firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 // Configuración del proyecto Firebase
 const firebaseConfig = {
@@ -15,7 +15,14 @@ const firebaseConfig = {
 
 // Inicializa Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+setPersistence(auth, browserLocalPersistence)
+    .then(() => console.log("✅ Persistencia de sesión habilitada"))
+    .catch((error) => console.error("❌ Error al establecer persistencia:", error));
 const db = getFirestore(app);
-const auth = getAuth(app);
 
-export { app, db, auth };
+export { app, auth, db };
+
+window.auth = auth;
+window.db = db;
+console.log("Firebase inicializado:", auth, db);

@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <script type="module" src="./src/script.js"></script>
 </head>
 <body>
     <h1>Bienvenido a tu perfil</h1>
     <h2>Partidos en los que has participado</h2>
-    <div id="matches-list">
-        <p>Cargando partidos...</p>
-    </div>
-    <div id="matches-container">
-        <p>Cargando partidos...</p>
-    </div>    
+    <div id="matches-container">Cargando partidos.</div>    
     <p id="user-email"></p>
     <button id="logout">Cerrar sesión</button>
+
+    <script type="module" src="./src/firebase.js"></script>
     <script type="module" src="./src/script.js"></script>
 </body>
 </html>
